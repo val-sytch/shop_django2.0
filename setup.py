@@ -6,6 +6,8 @@ setup(
     packages=find_packages(),
     install_requires=['cartridge',
                       'bleach',
+                      'google-api-python-client',
+                      'lxml',
                       ],
     include_package_data=True,
     url='https://github.com/val-sytch/shop_django2.0',
