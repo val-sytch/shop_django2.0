@@ -1,1 +1,3 @@
 recursive-include static/media/uploads/product/watermark w_mark.png
+recursive-include configs *.ini
+recursive-include services/services_config *.ini
