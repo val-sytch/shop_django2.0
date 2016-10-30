@@ -316,11 +316,11 @@ INSTALLED_APPS = (
     "mezzanine.generic",
     "mezzanine.pages",
     "cartridge.shop",
-    "mezzanine.blog",
+    # "mezzanine.blog",
     "mezzanine.forms",
     "mezzanine.galleries",
-    "mezzanine.twitter",
-    # "mezzanine.accounts",
+    # "mezzanine.twitter",
+    "mezzanine.accounts",
     # "mezzanine.mobile",
 )
 
@@ -411,3 +411,13 @@ except ImportError:
     pass
 else:
     set_dynamic_settings(globals())
+
+
+####################
+# DJOG SHOP CUSTOM SETTINGS #
+####################
+SHOP_USE_RATINGS = False
+SHOP_USE_RELATED_PRODUCTS = False
+SHOP_USE_VARIATIONS = False
+SHOP_USE_WISHLIST = False
+
