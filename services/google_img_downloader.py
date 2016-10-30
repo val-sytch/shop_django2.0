@@ -14,7 +14,7 @@ django.setup()
 from cartridge.shop.models import Product, ProductImage, ProductVariation
 from djog.settings import MEDIA_ROOT
 from services.img_resizer_and_watermark_add import img_resizer_and_watermark_add
-from services.parser_dog_breeds import parser_breeds
+from services.parser_dog_breeds import parser_breeds, breeds_links_read
 from django.utils import timezone
 
 PRICE_CHOICES = [5, 10, 15, 20, 25, 30]
@@ -71,10 +71,11 @@ def download_images_by_link(breed, link, image_width_requir, img_height_requir,
 
 
 def main():
-
-    breeds_list = parser_breeds()
-    breeds_list = breeds_list[100:200:20]
-    for breed in breeds_list:
+    breeds_list, links = parser_breeds()
+    breeds_list = breeds_list[0:100:20]
+    links = links[0:100:20]
+    description = breeds_links_read(links)
+    for i, breed in enumerate(breeds_list):
         print('Start downloading images for ' + breed)
         links = request_to_google_cse(API_KEY, breed, CUSTOM_SEARCH_ENGINE_ID, NUMBER_IMG_REQUIR)
         folder_single_breed_img = os.path.join(MEDIA_ROOT, 'uploads/product', breed)
@@ -83,7 +84,7 @@ def main():
         if not os.path.exists(folder_single_breed_img):
             os.makedirs(folder_single_breed_img)
 
-        new_dog_product = Product(available=True, title=breed, content="Good dog")
+        new_dog_product = Product(available=True, title=breed, content=description[i])
         new_dog_product.save()
         variation = ProductVariation(product=new_dog_product, default=True,
                                      unit_price=choice(PRICE_CHOICES), sale_from=timezone.now())
