@@ -24,7 +24,7 @@ def parser_breeds():
     return breeds, breeds_links
 
 
-def breeds_links_read():
+def breeds_links_read(links):
     """
     Open all links of dog breeds. Reads the pages
     and searches all id='mw-content-text'. Gets
@@ -32,9 +32,9 @@ def breeds_links_read():
     :return: list description of dog breeds
     """
     description_breeds = []
-    for links in parser_breeds()[1]:
+    for link in links:
         try:
-            response = urlopen(links).read()
+            response = urlopen(link).read()
         except HTTPError:
             description_breeds.append('Not information')
         soup = BeautifulSoup(response, 'lxml')
@@ -43,3 +43,12 @@ def breeds_links_read():
             p = content.get_text()
             description_breeds.append(p)
     return description_breeds
+
+
+def main():
+    breeds, links = parser_breeds()
+    description = breeds_links_read(links)
+    print(breeds, description)
+
+if __name__ == '__main__':
+     main()
