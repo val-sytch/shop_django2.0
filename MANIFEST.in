@@ -1,3 +1,8 @@
 recursive-include static/media/uploads/product/watermark w_mark.png
 recursive-include configs *.ini
 recursive-include services/services_config *.ini
+recursive-include templates *.html
+recursive-include static/djog *
+recursive-include static/css *
+include *.py
+include *.txt
