@@ -31,12 +31,12 @@ from django.utils.translation import ugettext_lazy as _
 
 # If True, the checkout process has a final confirmation step before
 # completion.
-# SHOP_CHECKOUT_STEPS_CONFIRMATION = True
+SHOP_CHECKOUT_STEPS_CONFIRMATION = False
 
 # Controls the formatting of monetary values accord to the locale
 # module in the python standard library. If an empty string is
 # used, will fall back to the system's locale.
-# SHOP_CURRENCY_LOCALE = ""
+SHOP_CURRENCY_LOCALE = "en_US.UTF-8"
 
 # Dotted package path and name of the function that
 # is called on submit of the billing/shipping checkout step. This
@@ -173,7 +173,7 @@ ALLOWED_HOSTS = []
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 # If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = True
@@ -316,12 +316,12 @@ INSTALLED_APPS = (
     "mezzanine.generic",
     "mezzanine.pages",
     "cartridge.shop",
-    "mezzanine.blog",
+    # "mezzanine.blog",
     "mezzanine.forms",
     "mezzanine.galleries",
-    "mezzanine.twitter",
-    # "mezzanine.accounts",
-    # "mezzanine.mobile",
+    # "mezzanine.twitter",
+    "mezzanine.accounts",
+    "mezzanine.mobile",
 )
 
 
@@ -411,3 +411,14 @@ except ImportError:
     pass
 else:
     set_dynamic_settings(globals())
+
+
+#############################
+# DJOG SHOP CUSTOM SETTINGS #
+#############################
+
+SHOP_USE_RATINGS = False
+SHOP_USE_RELATED_PRODUCTS = False
+SHOP_USE_VARIATIONS = False
+SHOP_USE_WISHLIST = False
+SHOP_PAYMENT_STEP_ENABLED = False
