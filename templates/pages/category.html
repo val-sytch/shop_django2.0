@@ -1,8 +1,13 @@
-{% extends "index.html" %}
+{% extends "pages/page.html" %}
+
 {% load mezzanine_tags shop_tags i18n %}
 {% block body_id %}category{% endblock %}
 
 {% block main %}{{ block.super }}
+
+{% editable page.category.content %}
+{{ page.category.content|safe }}
+{% endeditable %}
 
 {% if child_categories %}
 <div class="row shop-category-list">
@@ -35,8 +40,6 @@
 
 {% if products.paginator.count != 0 %}
 
-<div class="panel panel-default">
-                <div class="panel-body">
 <form class="product-sorting" role="form">
     <div class="form-group">
     <label class="control-label" for="sorting-select">{% trans "Sort by" %}</label>
@@ -51,7 +54,7 @@
         {% endfor %}
         </select>
     </div>
-</form></div></div>
+</form>
 
 <div class="row product-list">
 {% for product in products.object_list %}
