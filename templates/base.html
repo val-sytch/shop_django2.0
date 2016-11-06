@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n staticfiles %}
+
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+
+    {% compress css %}
+    <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
+    <!--<link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">--><!--DEBUG-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "djog/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static "djog/css/shop-homepage.css" %}" rel="stylesheet">
+
+    <!-- Temp/Debug CSS -->
+    <link href="{% static "djog/css/style.css" %}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+{% ifinstalled cartridge.shop %}
+<link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+{% if LANGUAGE_BIDI %}
+<link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
+{% endif %}
+{% endifinstalled %}
+{% block extra_css %}{% endblock %}
+{% endcompress %}
+
+{% compress js %}
+    <!-- jQuery -->
+    <script src="{% static "djog/js/jquery.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "djog/js/bootstrap.min.js" %}"></script>
+<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+<script src="{% static "js/bootstrap-extras.js" %}"></script>
+{% block extra_js %}{% endblock %}
+{% endcompress %}
+
+<!--[if lt IE 9]>
+<script src="{% static "js/html5shiv.js" %}"></script>
+<script src="{% static "js/respond.min.js" %}"></script>
+<![endif]-->
+
+{% block extra_head %}{% endblock %}
+</head>
+
+
+<body id="{% block body_id %}body{% endblock %}">
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                 {% block navbar_title %}
+    {% if settings.SITE_TITLE %}<a class="navbar-brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
+    {% if settings.SITE_TAGLINE %}<p class="navbar-text visible-lg">{{ settings.SITE_TAGLINE }}</p>{% endif %}
+    {% endblock%}
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    {% load i18n mezzanine_tags accounts_tags %}
+
+
+                    {% if request.user.is_authenticated %}
+    <li>
+
+    {% url "profile" request.user.username as profile_url %}
+    {% if profile_url %}
+                    <li><a href="{{ profile_url }}">{{ request.user|username_or:"email" }}</a>
+    <a href="{% url "profile_update" %}">
+            <span class="glyphicon glyphicon-edit"></span> {% trans "Update profile" %}</a>
+    {% else %}
+        <a style="color:#fff" href="{% url "profile_update" %}">{{ request.user|username_or:"email" }}</a>
+     </li>
+    {% endif %}
+    <li><a href="{% url "logout" %}?next={{ request.path }}">
+        <span class="glyphicon glyphicon-log-out"></span> {% trans "Log out" %}</a></li>
+{% else %}
+    <li><a href="{% url "signup" %}?next={{ request.path }}">
+        <span class="glyphicon glyphicon-edit"></span> {% trans "Sign up" %}</a></li>
+    <li><a href="{% url "login" %}?next={{ request.path }}">
+        <span class="glyphicon glyphicon-log-in"></span> {% trans "Log in" %}</a></li>
+{% endif %}
+
+                </ul>
+                {% block navbar_dropdown_menu %}{% page_menu "pages/menus/dropdown.html" %}{% endblock%}
+
+
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+<div class="container">
+
+        <div class="row">
+<div class="col-md-9 center">
+
+        {% nevercache %}
+{% if messages %}
+<div class="messages">
+{% for message in messages %}
+<div class="alert alert-success fade in" alert-{{ message.tags }}" data-alert="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>{{ message }}</strong>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+{% endnevercache %}
+
+    </div></div>
+
+    {% block carousel %}{% endblock %}
+    <div class="row">
+<div class="col-md-9 center">
+
+
+	{% block main %}{% endblock %}
+
+    <!-- /.container -->
+
+
+
+
+
+        <!-- Footer -->
+        <footer><div class="panel panel-default">
+        <div class="panel-body">
+                    <strong>Copyright &copy; DJOG-SHOP 2016</strong>
+            </div></div>
+        </footer>
+
+    </div></div>
+    <!-- /.container -->
+
+
+
+
+</body>
+
+</html>
