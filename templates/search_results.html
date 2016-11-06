@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 
 {% load i18n mezzanine_tags %}
 
@@ -8,16 +8,11 @@
 <meta name="robots" content="noindex">
 {% endblock %}
 
-{% block breadcrumb_menu %}
-<li>
-    <a href="{% url "home" %}">{% trans "Home" %}</a>
-</li>
-<li class="active">{% trans "Search Results" %}</li>
-{% endblock %}
-
 {% block main %}
 
-<p>
+<div class="panel panel-default">
+    <div class="panel-body">
+<h4>
 {% if results.paginator.count == 0 %}
 {% blocktrans %}
 No results were found in {{ search_type }} matching your query: {{ query }}
@@ -27,7 +22,8 @@ No results were found in {{ search_type }} matching your query: {{ query }}
 Showing {{ start }} to {{ end }} of {{ total }} results in {{ search_type }} matching your query: {{ query }}
 {% endblocktrans %}
 {% endif %}
-</p>
+</h4><hr>
+
 
 <div id="search-results">
 {% for result in results.object_list %}
@@ -49,6 +45,7 @@ Showing {{ start }} to {{ end }} of {{ total }} results in {{ search_type }} mat
 {% endwith %}
 {% endfor %}
 </div>
+</div></div>
 
 {% pagination_for results %}
 
