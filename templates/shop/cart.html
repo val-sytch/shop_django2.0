@@ -111,5 +111,6 @@
 
 {% else %}
 <p>{% trans "Your Cart is empty." %}</p>
+        <p><a class="btn btn-lg btn-primary" href="{% url "home" %}">{% trans "Continue Shopping" %}</a></p>
 {% endif %}</div></div>
 {% endblock %}
