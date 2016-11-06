@@ -15,3 +15,5 @@ IMG_WIDTH_REQUIR = int(config.get('IMAGES', 'width'))
 IMG_HEIGHT_REQUIR = int(config.get('IMAGES', 'height'))
 WATERMARK_OPACITY = float(config.get('IMAGES', 'watermark_opacity'))
 NUMBER_IMG_REQUIR = int(config.get('IMAGES', 'numb_img_requir'))
+
+ALLOWED_EXTENSIONS = ['jpg','jpeg','gif','png']
