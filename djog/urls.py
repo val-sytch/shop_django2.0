@@ -7,6 +7,7 @@ from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
 from cartridge.shop.views import order_history
 import mezzanine
+from djog import views
 
 admin.autodiscover()
 
@@ -26,7 +27,7 @@ if settings.USE_MODELTRANSLATION:
     ]
 
 urlpatterns += [
-
+    url("^moreDogs/$", views.moreDogs, name="moreDogs"),
     # Cartridge URLs.
     url("^shop/", include("cartridge.shop.urls")),
     url("^account/orders/$", order_history, name="shop_order_history"),
