@@ -4,12 +4,8 @@
 <span class="glyphicon glyphicon-shopping-cart"></span>
 {% blocktrans count request.cart.total_quantity as cart_quantity %}1 item{% plural %}{{ cart_quantity }} items{% endblocktrans %}
 {% trans "in cart" %}:
-{{ request.cart.total_price|currency }}</a><br>
-{% if request.cart.total_quantity != 0 %}
-<a href="{% url "shop_checkout" %}" class="btn btn-primary">
-    {% if request.session.order.step %}{% trans "Return to Checkout" %}{% else %}{% trans "Go to Checkout" %}{% endif %}
-</a><br>
-{% endif %}
+{{ request.cart.total_price|currency }}</a>
+
 {% if settings.SHOP_USE_WISHLIST %}
 <a href="{% url "shop_wishlist" %}" class="btn-wishlist">
 <span class="glyphicon glyphicon-star"></span>

@@ -42,6 +42,7 @@
 {% compress js %}
     <!-- jQuery -->
     <script src="{% static "djog/js/jquery.js" %}"></script>
+    <script src="{% static "djog/js/preview.js" %}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static "djog/js/bootstrap.min.js" %}"></script>
@@ -83,10 +84,8 @@
                 <ul class="nav navbar-nav">
                     {% load i18n mezzanine_tags accounts_tags %}
 
-
                     {% if request.user.is_authenticated %}
     <li>
-
     {% url "profile" request.user.username as profile_url %}
     {% if profile_url %}
                     <li><a href="{{ profile_url }}">{{ request.user|username_or:"email" }}</a>
@@ -96,6 +95,12 @@
         <a style="color:#fff" href="{% url "profile_update" %}">{{ request.user|username_or:"email" }}</a>
      </li>
     {% endif %}
+      <li>
+    {% ifinstalled cartridge.shop %}
+{% include "shop/includes/user_panel.html" %}
+{% endifinstalled %}
+    </li>
+
     <li><a href="{% url "logout" %}?next={{ request.path }}">
         <span class="glyphicon glyphicon-log-out"></span> {% trans "Log out" %}</a></li>
 {% else %}
