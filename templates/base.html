@@ -48,6 +48,10 @@
     <script src="{% static "djog/js/bootstrap.min.js" %}"></script>
 <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
 <script src="{% static "js/bootstrap-extras.js" %}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+      <script src="{{ STATIC_URL }}el-pagination/js/el-pagination.js"></script>
+    <script>$.endlessPaginate();</script>
 {% block extra_js %}{% endblock %}
 {% endcompress %}
 
@@ -158,6 +162,7 @@
         <footer><div class="panel panel-default">
         <div class="panel-body">
                     <strong>Copyright &copy; DJOG-SHOP 2016</strong>
+            {% page_menu "pages/menus/footer.html" %}
             </div></div>
         </footer>
 
