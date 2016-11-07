@@ -7,10 +7,7 @@ from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 from configs.config import (IMG_WIDTH_REQUIR, IMG_HEIGHT_REQUIR,
                             WATERMARK, WATERMARK_OPACITY, NUMBER_IMG_REQUIR)
-from services.services_config.serv_config import API_KEY, CUSTOM_SEARCH_ENGINE_ID
-import django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djog.settings")
-django.setup()
+from configs.services_config.serv_config import API_KEY, CUSTOM_SEARCH_ENGINE_ID
 from cartridge.shop.models import Product, ProductImage, ProductVariation
 from djog.settings import MEDIA_ROOT
 from services.img_resizer_and_watermark_add import img_resizer_and_watermark_add
@@ -72,8 +69,8 @@ def download_images_by_link(breed, link, image_width_requir, img_height_requir,
 
 def main():
     breeds_list, links = parser_breeds()
-    breeds_list = breeds_list[0:100:20]
-    links = links[0:100:20]
+    breeds_list = breeds_list[61:160]
+    links = links[61:160]
     description = breeds_links_read(links)
     for i, breed in enumerate(breeds_list):
         print('Start downloading images for ' + breed)

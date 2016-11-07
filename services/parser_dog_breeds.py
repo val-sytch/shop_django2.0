@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from services.services_config.serv_config import WIKI_URL, WIKI_DOGS_URL
+from configs.services_config.serv_config import WIKI_URL, WIKI_DOGS_URL
 from urllib.request import HTTPError, urlopen
 
 
