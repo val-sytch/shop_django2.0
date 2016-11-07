@@ -1,8 +1,19 @@
-recursive-include static/media/uploads/product/watermark w_mark.png
 recursive-include configs *.ini
-recursive-include services/services_config *.ini
-recursive-include templates *.html
+recursive-include configs/services_config *.ini
+recursive-include djog/static *
+recursive-include static/cartridge *
 recursive-include static/djog *
-recursive-include static/css *
-include *.py
-include *.txt
+recursive-include static/filebrowser *
+recursive-include static/fonts *
+recursive-include static/grappelli *
+recursive-include static/img *
+recursive-include static/js *
+prune static/media/uploads/product
+graft static/media/uploads/product/watermark
+recursive-include static/mezzanine *
+recursive-include templates *.html
+recursive-include fabfile.py
+recursive-include manage.py
+recursive-include MANIFEST.in
+recursive-include README.md
+recursive-include requirements.txt
