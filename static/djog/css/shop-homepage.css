@@ -48,7 +48,15 @@ body {
     padding: 9px;
     color: #333;
 }
-
+#loading{
+    padding: 10px;
+    border-radius: 5px;
+    background: #fff;
+    margin: 0 0 20px;
+}
+#loading img{
+    max-width: 42px;
+}
 footer {
     /*margin: 50px 0;*/
 }

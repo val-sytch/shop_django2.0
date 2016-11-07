@@ -85,7 +85,92 @@
 {% endfor %}
 </div>
 
-{% pagination_for products %}
+<div id="loading" class="text-center hide">
+    <img src="static/img/loading.gif">
+</div>
+{% load customtags %}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        var isLoading = false,
+            dogsContainer = $('.product-list'),
+            body = $('body'),
+            w = $(window),
+            spinner = $('#loading'),
+            totalPosts = {% get_total_posts %},
+            params = {
+                startPaging : {% get_post_per_page %},
+                sortBy : getSearch()
+            };
+
+        w.scroll(function(){
+            if((body.scrollTop() + w.height() > dogsContainer.offset().top + dogsContainer.height()) && !isLoading && totalPosts > params.startPaging){
+
+                isLoading = !isLoading;
+                spinner.removeClass('hide');
+
+                $.ajax({
+                    method  : "GET",
+                    url     : "/moreDogs/",
+                    data    : params,
+                    success : function(response){
+                        //console.log(response);
+                        //console.log(JSON.parse(response));
+                        response = JSON.parse(response);
+                        for(var i = 0; i < response.length; i++){
+
+                            var post = '' +
+                                '<div class="col-xs-6 col-sm-4 col-lg-3 product-thumb">' +
+                                    '<a href="/shop/product/' + response[i].fields.slug + '/" class="thumbnail">' +
+                                        '<img src="/static/media/' + response[i].fields.image + '">' +
+                                        '<div class="caption">' +
+                                            '<h6>' + response[i].fields.title + '</h6>' +
+                                            '<div class="price-info">' +
+                                                '<span class="price">$' + response[i].fields.unit_price + '</span>' +
+                                            '</div>' +
+                                        '</div>' +
+                                    '</a>' +
+                                '</div>';
+
+                            dogsContainer.append(post);
+
+                        }
+                        params.startPaging += response.length;
+
+                    }
+                })
+                .done(function(){
+
+                    spinner.addClass('hide');
+                    isLoading = !isLoading;
+
+                });
+
+            }
+
+        });
+
+        function getSearch(){
+            var temp = {};
+            if(document.location.toString().indexOf('?') !== -1) {
+                var query = document.location
+                               .toString()
+                               .replace(/^.*?\?/, '')
+                               .replace(/#.*$/, '')
+                               .split('&');
+
+                for(var i=0, l=query.length; i<l; i++) {
+                   var aux = decodeURIComponent(query[i]).split('=');
+                   temp[aux[0]] = aux[1];
+                }
+            }
+            if(temp['sort']) return temp['sort'];
+        }
+
+    });
+</script>
+{# pagination_for products #}
 
 {% endif %}
 
