@@ -1739,3 +1739,11 @@ img.banner-bag {
 	display:none;
 	color:#fff;
 	}
+
+.panel-bg{
+background: #000 url(../images/bg_dog_paw.jpg);
+}
+
+.panel-bg-inv{
+background: #fff url(../images/bg_dog_paw_inv.jpg);
+}

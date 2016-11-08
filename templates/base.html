@@ -64,7 +64,7 @@
 
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top panel-bg" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -124,8 +124,8 @@
     <!-- Page Content -->
 <div class="container">
 
-        <div class="row">
-<div class="col-md-9 center">
+
+<div class="col-md-13 center">
 
         {% nevercache %}
 {% if messages %}
@@ -140,7 +140,7 @@
 {% endif %}
 {% endnevercache %}
 
-    </div></div>
+    </div>
 
     <div class="row">
 <div class="col-md-9 center">
@@ -153,16 +153,16 @@
 
 
 
-
+</div></div></div></div>
         <!-- Footer -->
-        <footer><div class="panel panel-default">
-        <div class="panel-body">
+        <footer><div class="container"><div class="panel panel-default panel-bg-inv">
+    <div class="panel-body">
                     <strong>Copyright &copy; DJOG-SHOP 2016</strong>
-            </div></div>
+            {% page_menu "pages/menus/footer.html" %}
+            </div></div></div>
         </footer>
 
-    </div></div>
-    <!-- /.container -->
+
 
 
 
