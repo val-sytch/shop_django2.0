@@ -38,8 +38,9 @@
 
 {% if products.paginator.count != 0 %}
 
-<div class="panel panel-default">
+<div class="panel panel-default panel-bg-inv">
     <div class="panel-body">
+        {% search_form "shop.Product" %}
 <form class="product-sorting" role="form">
     <div class="form-group">
     <label class="control-label" for="sorting-select">{% trans "Sort by" %}</label>
@@ -69,7 +70,7 @@
         <div class="caption">
         <h6>{{ product }}</h6>
         <div class="price-info">
-        {% if product.has_price %}
+        {% if product.num_in_stock > 0 %}
             {% if product.on_sale %}
             <span class="old-price">{{ product.unit_price|currency }}</span>
             {% trans "On sale:" %}
