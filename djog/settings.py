@@ -384,8 +384,10 @@ OPTIONAL_APPS = (
 # Instead of doing "from .local_settings import *", we use exec so that
 # local_settings has full access to everything defined in this module.
 # Also force into sys.modules so it's visible to Django's autoreload.
+local_settings_file = 'local_settings{0}.py'.format("_" + os.environ.get('DJANGO_PROJ_MODE')
+                                     if os.environ.get('DJANGO_PROJ_MODE') else '')
 
-f = os.path.join(PROJECT_APP_PATH, "local_settings.py")
+f = os.path.join(PROJECT_APP_PATH, local_settings_file)
 if os.path.exists(f):
     import sys
     import imp
