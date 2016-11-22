@@ -21,8 +21,23 @@ Install all required packages
 ```
 $(venv) fab install_requir
 ```
+Open local_settings.py and local_settings_prod.py and set all variables that contain value your...
+
+You could choose a database:
+
+1. sqlite3 as a default/development database(do nothing)
+2. MySQL for production. To use it set the environment variable:
+```
+$(venv)export DJANGO_PROJ_MODE=prod
+```
 Create database(pay attention to superuser credentials)
 ```
+$(venv) fab initdb
+```
+Additional info: to switch to default sqlite db just unset
+the env variable and launch db initialising once again
+```
+$(venv)unset DJANGO_PROJ_MODE=prod
 $(venv) fab initdb
 ```
 Optionally(fill in database with Products)
