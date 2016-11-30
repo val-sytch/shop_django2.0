@@ -83,8 +83,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     {% load i18n mezzanine_tags accounts_tags %}
-
+               <li>
+    {% ifinstalled cartridge.shop %}
+{% include "shop/includes/user_panel.html" %}
+{% endifinstalled %}
+    </li>
                     {% if request.user.is_authenticated %}
+
     <li>
     {% url "profile" request.user.username as profile_url %}
     {% if profile_url %}
@@ -95,11 +100,7 @@
         <a style="color:#fff" href="{% url "profile_update" %}">{{ request.user|username_or:"email" }}</a>
      </li>
     {% endif %}
-      <li>
-    {% ifinstalled cartridge.shop %}
-{% include "shop/includes/user_panel.html" %}
-{% endifinstalled %}
-    </li>
+
 
     <li><a href="{% url "logout" %}?next={{ request.path }}">
         <span class="glyphicon glyphicon-log-out"></span> {% trans "Log out" %}</a></li>

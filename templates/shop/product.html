@@ -59,6 +59,7 @@ $(document).ready(function() {
 
 {% if images %}
 {% spaceless %}
+<div class="panel-body">
 <ul id="product-images-large" class="list-unstyled list-inline">
     {% for image in images %}
     <li id="image-{{ image.id }}-large"{% if not forloop.first %}style="display:none;"{% endif %}>
@@ -78,7 +79,7 @@ $(document).ready(function() {
         </a>
     </li>
     {% endfor %}
-</ul>
+</ul></div>
 {% endif %}
 
 {% endspaceless %}
@@ -117,14 +118,16 @@ $(document).ready(function() {
 <form method="post" id="add-cart" class="shop-form">
     {% fields_for add_product_form %}
     <div class="form-actions">
-        <input type="submit" class="btn btn-success btn-lg pull-right" name="add_cart" value="{% trans "Buy" %}">
+        <input type="submit" class="btn btn-success btn-lg pull-right" name="add_cart" value="{% trans "Buy" %}" style="
+width: 100%;margin: 30px 0 20px 0;">
         {% if settings.SHOP_USE_WISHLIST %}
         <input type="submit" class="btn btn-default btn-lg pull-left" name="add_wishlist" value="{% trans "Save for later" %}">
         {% endif %}
     </div>
 </form>
 {% else %}
-<p class="error-msg">{% trans "This product is currently unavailable." %}</p>
+<br>
+<p class="error-msg text-center">{% trans "This product is currently unavailable." %}</p>
 {% endif %}
 
 {% if settings.SHOP_USE_RATINGS %}
