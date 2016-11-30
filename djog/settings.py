@@ -323,6 +323,7 @@ INSTALLED_APPS = (
     # "mezzanine.twitter",
     "mezzanine.accounts",
     "mezzanine.mobile",
+    "debug_toolbar"
 )
 
 
@@ -330,6 +331,7 @@ INSTALLED_APPS = (
 # these middleware classes will be applied in the order given, and in the
 # response phase the middleware will be applied in reverse order.
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     "mezzanine.core.middleware.UpdateCacheMiddleware",
 
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -425,3 +427,6 @@ SHOP_USE_RELATED_PRODUCTS = False
 SHOP_USE_VARIATIONS = False
 SHOP_USE_WISHLIST = False
 SHOP_PAYMENT_STEP_ENABLED = False
+ACCOUNTS_VERIFICATION_REQUIRED = True
+ACCOUNT_APPROVAL_REQUIRED = True
+ACCOUNT_APPROVAL_EMAILS = 'djog.tk@gmail.com'
